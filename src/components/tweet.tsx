@@ -24,7 +24,11 @@ const Tweet = ({ user, created_at, text }: ITWeet) => (
 				<p className="font-bold">{user?.name}</p>
 				<p className="font-light text-sm">
 					<em>
-						@{user?.username} &middot;{' '}
+						@
+						{user?.username}
+						{' '}
+						&middot;
+						{' '}
 						{formatDistance(new Date(created_at), new Date(), {
 							addSuffix: true,
 						})}
