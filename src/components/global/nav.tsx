@@ -14,9 +14,9 @@ const Nav = () => {
 	};
 
 	return (
-		<nav className="bg-gray-100 px-8 py-4 border-r border-gray-200 font-bold flex justify-between items-center h-16">
+		<nav className="bg-gray-100 p-4 border-r border-gray-200 font-bold flex justify-between items-center h-16 w-full">
 			<div className="relative flex items-center">
-				<button onClick={onClick} type="button" className="md:hidden">
+				{/* <button onClick={onClick} type="button" className="md:hidden">
 					{isActive ? (
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +80,7 @@ const Nav = () => {
 						</svg>
 					)}
 					<span className="sr-only">Menu</span>
-				</button>
+				</button> */}
 				<picture
 					style={{
 						minWidth: '6rem',
@@ -88,7 +88,7 @@ const Nav = () => {
 				>
 					<img src="images/toronto.svg" alt="Toronto Logo" />
 				</picture>
-				<h1 className="absolute ml-4 md:relative font-thin whitespace-no-wrap">
+				<h1 className="ml-4 md:relative font-thin whitespace-no-wrap">
 					Mobile Vaccination Map (Demo)
 				</h1>
 			</div>

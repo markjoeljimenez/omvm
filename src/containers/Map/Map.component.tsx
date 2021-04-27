@@ -32,7 +32,7 @@ const Map = () => {
 		map.data.revertStyle();
 		map.data.overrideStyle(e.feature, {
 			fillColor: '#2c5282',
-			fillOpacity: 0.8,
+			fillOpacity: 0.9,
 		});
 	}
 
@@ -58,9 +58,10 @@ const Map = () => {
 					.replace('\n', ' ')
 					.includes(feature.getProperty('CFSAUID'))
 			)
-				? 0.6
+				? 0.7
 				: 0.2,
-			strokeColor: '#2c5282',
+			strokeColor: '#d7e9ff',
+			strokeOpacity: 0.2,
 			strokeWeight: 1,
 		}));
 

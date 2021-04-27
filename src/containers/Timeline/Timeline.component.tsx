@@ -27,7 +27,7 @@ const Timeline = () => {
 	const { data, includes, activeTweets, postal } = timeline;
 
 	return (
-		<>
+		<div className="max-h-10 overflow-auto md:max-h-none">
 			{data.map(({ id, created_at, text, author_id }) => {
 				const user = getTwitterUserInfo(includes, author_id);
 
@@ -44,7 +44,7 @@ const Timeline = () => {
 					</div>
 				);
 			})}
-		</>
+		</div>
 	);
 };
 
