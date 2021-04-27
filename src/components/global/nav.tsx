@@ -101,16 +101,7 @@ const Nav = () => {
 				<ul>
 					<li>
 						<Link href="/">
-							<a
-							// className={clsx(
-							// 	router.pathname === '/' && 'bg-gray-300',
-							// 	'hover:bg-gray-300',
-							// 	'block',
-							// 	'px-4',
-							// 	'py-3',
-							// 	'rounded-md',
-							// )}
-							>
+							<a>
 								<span className="pl-8">Map</span>
 							</a>
 						</Link>

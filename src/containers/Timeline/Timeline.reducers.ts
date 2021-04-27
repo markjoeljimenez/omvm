@@ -7,6 +7,7 @@ import { ITweet } from './Timeline.component';
 
 interface IState {
 	data?: ITweet[];
+	defaultData?: ITweet[];
 }
 
 const DEFAULT_STATE: IState = {};
