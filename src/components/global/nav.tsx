@@ -88,8 +88,8 @@ const Nav = () => {
 				>
 					<img src="images/toronto.svg" alt="Toronto Logo" />
 				</picture>
-				<h1 className="absolute ml-4 md:relative font-black whitespace-no-wrap">
-					Mobile Vaccination Map
+				<h1 className="absolute ml-4 md:relative font-thin whitespace-no-wrap">
+					Mobile Vaccination Map (Demo)
 				</h1>
 			</div>
 			<div

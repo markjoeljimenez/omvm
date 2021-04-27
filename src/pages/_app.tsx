@@ -2,6 +2,7 @@
 
 import * as Sentry from '@sentry/browser';
 import { DefaultSeo } from 'next-seo';
+import { wrapper } from '../store';
 
 import Dashboard from '../layouts/dashboard';
 
@@ -33,4 +34,4 @@ const App = ({ Component, pageProps }: IApp) => {
 	);
 };
 
-export default App;
+export default wrapper.withRedux(App);

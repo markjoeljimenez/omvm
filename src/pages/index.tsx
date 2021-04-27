@@ -1,13 +1,26 @@
-import { filterTweets, ITweet } from '../lib/getTweets';
+import { wrapper } from '../store';
+import { getTweets } from '../lib/twitter';
+import { useAppDispatch, useAppSelector } from '../hooks';
 
-import Map from '../components/map';
+import Map from '../containers/Map/Map.component';
+import Timeline from '../containers/Timeline/Timeline.component';
+import {
+	setActiveTweets,
+	setTweets,
+} from '../containers/Timeline/Timeline.actions';
 
 interface IIndexProps {
-	posts: ITweet[];
+	initialReduxState: any;
 }
 
-const Index = ({ posts }: IIndexProps) => {
-	console.log(posts);
+const Index = ({ initialReduxState }: IIndexProps) => {
+	const { timeline } = useAppSelector((state) => state);
+	const dispatch = useAppDispatch();
+	const { active } = timeline;
+
+	function handleBack() {
+		dispatch(setActiveTweets(false));
+	}
 
 	return (
 		<div
@@ -17,22 +30,31 @@ const Index = ({ posts }: IIndexProps) => {
 				position: 'relative',
 			}}
 		>
-			<Map posts={posts} />
+			<div className="absolute left-0 top-0 z-10 h-full max-w-1/4 overflow-y-auto bg-white">
+				{active ? (
+					<div className="p-4 border-gray-400 border-b">
+						<button onClick={handleBack}>Back</button>
+					</div>
+				) : (
+					<></>
+				)}
+				<Timeline />
+			</div>
+			<Map />
 		</div>
 	);
 };
 
-export async function getStaticProps() {
-	// const { data } = await getTweets();
+export const getServerSideProps = wrapper.getServerSideProps(
+	async ({ store }) => {
+		const { dispatch, getState } = store;
+		// const data = await getTweets();
+		const data = require('../data/tweets.json');
 
-	const data = require('../data/tweets.json');
+		dispatch(setTweets(data));
 
-	return {
-		props: {
-			posts: filterTweets(data),
-		},
-		revalidate: 1,
-	};
-}
+		return { props: { initialReduxState: getState() } };
+	}
+);
 
 export default Index;

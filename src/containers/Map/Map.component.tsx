@@ -1,14 +1,11 @@
-import { useState } from 'react';
 import GoogleMaps from 'google-map-react';
-import { ITweet } from '../lib/getTweets';
 
-import Marker from '../components/marker';
+import Marker from '../../components/marker';
+import { ITweet } from '../Timeline/Timeline.component';
 
-import { IGoogleGeocodeResult } from '../interfaces/IGoogleGeocode';
-
-interface IMap {
-	posts: ITweet[];
-}
+import { IGoogleGeocodeResult } from '../../interfaces/IGoogleGeocode';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setActiveTweets } from '../Timeline/Timeline.actions';
 
 interface IFeature {
 	posts: ITweet[];
@@ -23,11 +20,13 @@ const DEFAULT_OPTIONS = {
 	region: 'ca',
 };
 
-const Map = ({ posts }: IMap) => {
-	const [locations, setLocations] = useState<
-		IGoogleGeocodeResult[] | undefined
-	>();
-	const [activeFeature, setActiveFeature] = useState<IFeature | undefined>();
+const Map = () => {
+	const { timeline } = useAppSelector((state) => state);
+	const dispatch = useAppDispatch();
+
+	// const [locations, setLocations] = useState<
+	// 	IGoogleGeocodeResult[] | undefined
+	// >();
 
 	function handleHover(e, map) {
 		map.data.revertStyle();
@@ -38,21 +37,17 @@ const Map = ({ posts }: IMap) => {
 	}
 
 	function handleClick(e, map) {
-		console.log(e.feature.getProperty('CFSAUID'));
-		// setActiveFeature({
-		// 	postal: e.feature.getProperty('CFSAUID'),
-		// 	posts: posts.filter((post) =>
-		// 		post.postal_codes.some(
-		// 			(postal_code) =>
-		// 				postal_code.FSA === e.feature.getProperty('CFSAUID')
-		// 		)
-		// 	),
-		// 	mobileLocations: mobileLocations.filter(
-		// 		(location) =>
-		// 			location.postal_code.FSA ===
-		// 			e.feature.getProperty('CFSAUID')
-		// 	),
-		// });
+		const tweets = timeline.data.filter((tweet) =>
+			tweet.text
+				.replace('\n', ' ')
+				.includes(e.feature.getProperty('CFSAUID'))
+		);
+
+		if (tweets.length) {
+			dispatch(
+				setActiveTweets(true, tweets, e.feature.getProperty('CFSAUID'))
+			);
+		}
 	}
 
 	function handleApiLoaded(map, maps) {
@@ -60,12 +55,12 @@ const Map = ({ posts }: IMap) => {
 
 		map.data.setStyle((feature) => ({
 			fillColor: '#2c5282',
-			fillOpacity: posts.some((post) =>
+			fillOpacity: timeline.data.some((post) =>
 				post.text
 					.replace('\n', ' ')
 					.includes(feature.getProperty('CFSAUID'))
 			)
-				? 0.6
+				? 0.8
 				: 0.2,
 			strokeColor: '#2c5282',
 			strokeWeight: 1,
@@ -86,14 +81,14 @@ const Map = ({ posts }: IMap) => {
 			yesIWantToUseGoogleMapApiInternals
 			onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
 		>
-			{locations?.map(({ geometry, place_id }) => (
+			{/* {locations?.map(({ geometry, place_id }) => (
 				<Marker
 					key={place_id}
 					lat={geometry.location.lat}
 					lng={geometry.location.lng}
 					text="test"
 				/>
-			))}
+			))} */}
 		</GoogleMaps>
 	);
 };
