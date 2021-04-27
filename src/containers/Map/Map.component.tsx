@@ -37,16 +37,14 @@ const Map = () => {
 	}
 
 	function handleClick(e, map) {
+		const postal = e.feature.getProperty('CFSAUID');
+
 		const tweets = timeline.data.filter((tweet) =>
-			tweet.text
-				.replace('\n', ' ')
-				.includes(e.feature.getProperty('CFSAUID'))
+			tweet.text.replace('\n', ' ').includes(postal)
 		);
 
 		if (tweets.length) {
-			dispatch(
-				setActiveTweets(true, tweets, e.feature.getProperty('CFSAUID'))
-			);
+			dispatch(setActiveTweets(true, tweets, postal));
 		}
 	}
 
@@ -60,7 +58,7 @@ const Map = () => {
 					.replace('\n', ' ')
 					.includes(feature.getProperty('CFSAUID'))
 			)
-				? 0.8
+				? 0.6
 				: 0.2,
 			strokeColor: '#2c5282',
 			strokeWeight: 1,

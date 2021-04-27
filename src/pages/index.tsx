@@ -32,7 +32,7 @@ const Index = ({ initialReduxState }: IIndexProps) => {
 		>
 			<div className="absolute left-0 top-0 z-10 h-full max-w-1/4 overflow-y-auto bg-white">
 				{active ? (
-					<div className="p-4 border-gray-400 border-b">
+					<div className="p-4">
 						<button onClick={handleBack}>Back</button>
 					</div>
 				) : (
@@ -48,8 +48,8 @@ const Index = ({ initialReduxState }: IIndexProps) => {
 export const getServerSideProps = wrapper.getServerSideProps(
 	async ({ store }) => {
 		const { dispatch, getState } = store;
-		// const data = await getTweets();
-		const data = require('../data/tweets.json');
+		const data = await getTweets();
+		// const data = require('../data/tweets.json');
 
 		dispatch(setTweets(data));
 
