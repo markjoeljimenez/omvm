@@ -17,7 +17,7 @@ module.exports = {
 	},
 	theme: {
 		fontFamily: {
-			display: ['Nunito', 'sans-serif'],
+			display: ['Roboto', 'sans-serif'],
 		},
 		screens: {
 			sm: '640px',
