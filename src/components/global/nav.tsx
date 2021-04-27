@@ -92,7 +92,7 @@ const Nav = () => {
 					Mobile Vaccination Map (Demo)
 				</h1>
 			</div>
-			<div
+			{/* <div
 				className={clsx(
 					'md:max-h-none overflow-hidden transition-all duration-300 space-y-6',
 					isActive ? 'max-h-10' : 'max-h-0'
@@ -107,7 +107,7 @@ const Nav = () => {
 						</Link>
 					</li>
 				</ul>
-			</div>
+			</div> */}
 		</nav>
 	);
 };

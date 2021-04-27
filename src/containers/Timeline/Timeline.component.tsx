@@ -1,5 +1,4 @@
-import ReactMarkdown from 'react-markdown';
-import { format } from 'date-fns';
+import Tweet from '../../components/tweet';
 import { useAppSelector } from '../../hooks';
 import { getTwitterUserInfo } from '../../lib/twitter';
 
@@ -33,14 +32,11 @@ const Timeline = () => {
 
 				return (
 					<div key={id} className="p-4 border-gray-300 border-t">
-						<h2>{user?.username}</h2>
-						<picture>
-							<img src={user?.profile_image_url} alt="" />
-						</picture>
-						<p>
-							{format(new Date(created_at), 'MMMM d, yyyy - p')}
-						</p>
-						<ReactMarkdown>{text}</ReactMarkdown>
+						<Tweet
+							user={user}
+							created_at={created_at}
+							text={text}
+						/>
 					</div>
 				);
 			})}
