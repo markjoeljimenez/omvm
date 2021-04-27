@@ -30,7 +30,7 @@ const Index = ({ initialReduxState }: IIndexProps) => {
 				position: 'relative',
 			}}
 		>
-			<div className="absolute left-0 top-0 z-10 md:h-full md:max-w-1/4 overflow-y-auto bg-white">
+			<div className="absolute left-0 top-0 z-10 md:max-w-25 md:h-full overflow-y-auto bg-white">
 				{active ? (
 					<div className="p-4">
 						<button onClick={handleBack} type="button">

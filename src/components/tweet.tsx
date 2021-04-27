@@ -14,13 +14,9 @@ const Tweet = ({ user, created_at, text }: ITWeet) => (
 	<>
 		<div className="flex items-center">
 			<picture className="w-12 h-12 rounded-full border-blue-400 border block overflow-hidden">
-				<img
-					src={user?.profile_image_url}
-					alt=""
-					className="block w-full"
-				/>
+				<img src={user?.profile_image_url} alt="" className="block" />
 			</picture>
-			<div className="ml-2 leading-5">
+			<div className="ml-2 leading-5 flex-1">
 				<p className="font-bold">{user?.name}</p>
 				<p className="font-light text-sm">
 					<em>
