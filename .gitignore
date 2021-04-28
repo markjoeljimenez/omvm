@@ -35,3 +35,7 @@ yarn-error.log*
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+# Prisma
+/prisma/migrations
+/prisma/*.db
