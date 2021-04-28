@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 
 import { wrapper } from '../store';
-import { getTweets } from '../lib/twitter';
 import { useAppDispatch, useAppSelector } from '../hooks';
 
 import Map from '../containers/Map/Map.component';
@@ -53,19 +52,27 @@ const prisma = new PrismaClient();
 
 export const getServerSideProps = wrapper.getServerSideProps(
 	async ({ store }) => {
-		const data = await prisma.data.findMany();
+		const data = await prisma.data.findMany({
+			orderBy: [
+				{
+					created_at: 'desc',
+				},
+			],
+		});
 		const users = await prisma.author.findMany();
 
 		const { dispatch, getState } = store;
 
 		dispatch(
 			setTweets({
-				data,
+				data: JSON.parse(JSON.stringify(data)),
 				includes: {
 					users,
 				},
 			})
 		);
+
+		prisma.$disconnect();
 
 		return { props: { initialReduxState: getState() } };
 	}
