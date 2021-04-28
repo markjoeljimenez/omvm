@@ -24,8 +24,8 @@ const App = ({ Component, pageProps }: IApp) => {
 	return (
 		<>
 			<DefaultSeo
-				title="Toronto Mobile Vaccination Map"
-				description="Track down the latest mobile vaccination pop ups around Toronto."
+				title="Ontario Mobile Vaccination Map"
+				description="Track down the latest mobile vaccination pop ups around Ontario."
 			/>
 			<Dashboard>
 				<Component {...pageProps} />
