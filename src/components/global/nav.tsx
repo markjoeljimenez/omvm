@@ -86,7 +86,7 @@ const Nav = () => {
 						minWidth: '6rem',
 					}}
 				>
-					<img src="images/toronto.svg" alt="Toronto Logo" />
+					<img src="images/ontario.svg" alt="Ontario logo" />
 				</picture>
 				<h1 className="ml-4 md:relative font-thin whitespace-no-wrap">
 					Mobile Vaccination Map (Demo)

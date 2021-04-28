@@ -1,8 +1,8 @@
-# Toronto Mobile Vaccination Map
+# Ontario Mobile Vaccination Map
 
-:globe_with_meridians: https://tmvm.vercel.app/
+:globe_with_meridians: https://omvm.vercel.app/
 
-Track where the latest mobile vaccination locations are around Toronto.
+Track where the latest mobile vaccination locations are around Ontario.
 
 ## Installation
 
