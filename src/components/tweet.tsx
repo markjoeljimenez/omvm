@@ -25,9 +25,12 @@ const Tweet = ({ user, created_at, text }: ITWeet) => (
 							rel="noreferrer noopener"
 							className="hover:underline"
 						>
-							@{user?.username}
-						</a>{' '}
-						&middot;{' '}
+							@
+							{user?.username}
+						</a>
+						{' '}
+						&middot;
+						{' '}
 						{formatDistance(new Date(created_at), new Date(), {
 							addSuffix: true,
 						})}
