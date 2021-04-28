@@ -7,10 +7,6 @@ import { IGoogleGeocodeResult } from '../../interfaces/IGoogleGeocode';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setActiveTweets } from '../Timeline/Timeline.actions';
 
-interface IFeature {
-	posts: ITweet[];
-}
-
 const DEFAULT_OPTIONS = {
 	center: {
 		lat: 43.7184034,
@@ -23,15 +19,12 @@ const DEFAULT_OPTIONS = {
 const Map = () => {
 	const { timeline } = useAppSelector((state) => state);
 	const dispatch = useAppDispatch();
-
-	// const [locations, setLocations] = useState<
-	// 	IGoogleGeocodeResult[] | undefined
-	// >();
+	const fillColor = '#4338CA';
 
 	function handleHover(e, map) {
 		map.data.revertStyle();
 		map.data.overrideStyle(e.feature, {
-			fillColor: '#2c5282',
+			fillColor,
 			fillOpacity: 0.9,
 		});
 	}
@@ -49,19 +42,19 @@ const Map = () => {
 	}
 
 	function handleApiLoaded(map, maps) {
-		map.data.loadGeoJson('../data/toronto.json');
+		map.data.loadGeoJson('../data/ontario.json');
 
 		map.data.setStyle((feature) => ({
-			fillColor: '#2c5282',
+			fillColor,
 			fillOpacity: timeline.data.some((post) =>
 				post.text
 					.replace('\n', ' ')
 					.includes(feature.getProperty('CFSAUID'))
 			)
-				? 0.7
-				: 0.2,
+				? 0.8
+				: 0.1,
 			strokeColor: '#d7e9ff',
-			strokeOpacity: 0.2,
+			strokeOpacity: 0.1,
 			strokeWeight: 1,
 		}));
 
