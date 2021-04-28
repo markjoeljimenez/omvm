@@ -1,5 +1,4 @@
-import ReactMarkdown from 'react-markdown';
-import { format, formatDistance } from 'date-fns';
+import { formatDistance } from 'date-fns';
 import Linkify from 'react-linkify';
 
 import { ITwitterUser } from '../containers/Timeline/Timeline.component';
@@ -17,14 +16,18 @@ const Tweet = ({ user, created_at, text }: ITWeet) => (
 				<img src={user?.profile_image_url} alt="" className="block" />
 			</picture>
 			<div className="ml-2 leading-5 flex-1">
-				<p className="font-bold">{user?.name}</p>
-				<p className="font-light text-sm">
+				<p className="font-bold inline-block">{user?.name}</p>
+				<p className="font-light text-sm inline-block">
 					<em>
-						@
-						{user?.username}
-						{' '}
-						&middot;
-						{' '}
+						<a
+							href={`https://twitter.com/${user?.username}`}
+							target="_blank"
+							rel="noreferrer noopener"
+							className="hover:underline"
+						>
+							@{user?.username}
+						</a>{' '}
+						&middot;{' '}
 						{formatDistance(new Date(created_at), new Date(), {
 							addSuffix: true,
 						})}
