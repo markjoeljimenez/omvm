@@ -31,7 +31,10 @@ const Timeline = () => {
 				const user = getTwitterUserInfo(includes, author_id);
 
 				return (
-					<div key={id} className="p-4 border-gray-300 border-t">
+					<div
+						key={id}
+						className="p-4 border-gray-300 border-t overflow-x-hidden"
+					>
 						<Tweet
 							user={user}
 							created_at={created_at}
