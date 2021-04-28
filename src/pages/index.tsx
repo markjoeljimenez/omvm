@@ -1,3 +1,5 @@
+import { PrismaClient } from '@prisma/client';
+
 import { wrapper } from '../store';
 import { getTweets } from '../lib/twitter';
 import { useAppDispatch, useAppSelector } from '../hooks';
@@ -47,13 +49,23 @@ const Index = ({ initialReduxState }: IIndexProps) => {
 	);
 };
 
+const prisma = new PrismaClient();
+
 export const getServerSideProps = wrapper.getServerSideProps(
 	async ({ store }) => {
-		const { dispatch, getState } = store;
-		const data = await getTweets();
-		// const data = require('../data/tweets.json');
+		const data = await prisma.data.findMany();
+		const users = await prisma.author.findMany();
 
-		dispatch(setTweets(data));
+		const { dispatch, getState } = store;
+
+		dispatch(
+			setTweets({
+				data,
+				includes: {
+					users,
+				},
+			})
+		);
 
 		return { props: { initialReduxState: getState() } };
 	}

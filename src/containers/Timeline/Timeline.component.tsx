@@ -18,7 +18,7 @@ export interface ITwitterUser {
 
 export interface ITwitterResponse {
 	data: ITweet[];
-	includes: ITwitterUser[];
+	includes: { users: ITwitterUser[] };
 }
 
 const Timeline = () => {
@@ -27,7 +27,7 @@ const Timeline = () => {
 
 	return (
 		<div className="max-h-10 overflow-auto md:max-h-none">
-			{data.map(({ id, created_at, text, author_id }) => {
+			{data?.map(({ id, created_at, text, author_id }) => {
 				const user = getTwitterUserInfo(includes, author_id);
 
 				return (

@@ -1,6 +1,7 @@
 import queryString from 'query-string';
 import {
 	ITweet,
+	ITwitterResponse,
 	ITwitterUser,
 } from '../containers/Timeline/Timeline.component';
 
@@ -11,12 +12,12 @@ const OPTIONS = {
 	optional: {
 		expansions: 'author_id',
 		'user.fields': ['id', 'name', 'profile_image_url'],
-		'tweet.fields': ['source', 'created_at'],
-		max_results: 40,
+		'tweet.fields': ['created_at'],
+		max_results: 5,
 	},
 };
 
-export async function getTweets() {
+export async function getTweets(): Promise<ITwitterResponse> {
 	const users = queryString
 		.stringify(OPTIONS.users, {
 			arrayFormat: 'comma',
