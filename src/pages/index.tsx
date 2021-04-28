@@ -58,12 +58,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
 		const { dispatch, getState } = store;
 
-		// For testing purposes. Delete later
-		const test = await fetch(`${process.env.HOST}/api/request`);
-		// const test2 = await test.json();
-
-		// console.log(test2);
-
 		dispatch(
 			setTweets({
 				data,
