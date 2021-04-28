@@ -33,7 +33,10 @@ const Map = () => {
 		const postal = e.feature.getProperty('CFSAUID');
 
 		const tweets = timeline.data.filter((tweet) =>
-			tweet.text.replace('\n', ' ').includes(postal)
+			tweet.text
+				.replace('\n', ' ')
+				.replace(/https:\/\/t.co\/[A-z]\w+/g, '')
+				.includes(postal)
 		);
 
 		if (tweets.length) {
@@ -49,6 +52,7 @@ const Map = () => {
 			fillOpacity: timeline.data.some((post) =>
 				post.text
 					.replace('\n', ' ')
+					.replace(/https:\/\/t.co\/[A-z]\w+/g, '')
 					.includes(feature.getProperty('CFSAUID'))
 			)
 				? 0.8
@@ -72,16 +76,7 @@ const Map = () => {
 			defaultZoom={DEFAULT_OPTIONS.zoom}
 			yesIWantToUseGoogleMapApiInternals
 			onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
-		>
-			{/* {locations?.map(({ geometry, place_id }) => (
-				<Marker
-					key={place_id}
-					lat={geometry.location.lat}
-					lng={geometry.location.lng}
-					text="test"
-				/>
-			))} */}
-		</GoogleMaps>
+		/>
 	);
 };
 
