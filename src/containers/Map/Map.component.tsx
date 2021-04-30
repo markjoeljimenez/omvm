@@ -25,7 +25,7 @@ const Map = () => {
 		map.data.revertStyle();
 		map.data.overrideStyle(e.feature, {
 			fillColor,
-			fillOpacity: 0.9,
+			fillOpacity: 0.7,
 		});
 	}
 
@@ -55,10 +55,10 @@ const Map = () => {
 					.replace(/https:\/\/t.co\/[A-z]\w+/g, '')
 					.includes(feature.getProperty('CFSAUID'))
 			)
-				? 0.8
-				: 0.1,
-			strokeColor: '#d7e9ff',
-			strokeOpacity: 0.1,
+				? 0.6
+				: 0.2,
+			strokeColor: '#fff',
+			strokeOpacity: 0.6,
 			strokeWeight: 1,
 		}));
 
@@ -68,7 +68,9 @@ const Map = () => {
 
 	return (
 		<GoogleMaps
-			bootstrapURLKeys={{ key: process.env.GA_MAPS_KEY }}
+			bootstrapURLKeys={{
+				key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY,
+			}}
 			options={() => ({
 				fullscreenControl: false,
 			})}

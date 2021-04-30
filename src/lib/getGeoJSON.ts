@@ -1,6 +1,6 @@
 import IGoogleGeocode from '../interfaces/IGoogleGeocode';
 
-const KEY = process.env.NEXT_PUBLIC_KEY;
+const KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY;
 
 const getGeoJSON = async (address: string): Promise<IGoogleGeocode> => {
 	const req = await fetch(
