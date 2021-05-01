@@ -13,7 +13,7 @@ const OPTIONS = {
 		expansions: 'author_id',
 		'user.fields': ['id', 'name', 'profile_image_url'],
 		'tweet.fields': ['created_at'],
-		max_results: 100,
+		max_results: 10,
 	},
 };
 

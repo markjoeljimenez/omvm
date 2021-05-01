@@ -43,13 +43,14 @@ const Map = () => {
 		}
 	}
 
-	function handleChildClick(key, { original_address }) {
+	function handleChildClick(key, marker) {
+		console.log(marker);
 		const tweets = timeline.defaultData.filter((tweet) =>
 			tweet.text
 				.replace('\n', ' ')
 				.replace(/https:\/\/t.co\/[A-z]\w+/g, '')
 				.toLowerCase()
-				.includes(original_address)
+				.includes(marker.original_address)
 		);
 
 		if (tweets.length) {

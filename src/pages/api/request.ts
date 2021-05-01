@@ -39,7 +39,7 @@ async function deleteDayOldLocations() {
 	});
 }
 
-async function getLocations(data) {
+async function getLocations(data): Promise<any> {
 	const locations: string[] = _.uniq(
 		data
 			.map((tweet) =>
@@ -62,22 +62,35 @@ async function getLocations(data) {
 		})
 	);
 
-	return geoLocations.map((location) => {
-		const [l] = location.results;
+	return geoLocations
+		.map((location) => {
+			const ontarioLocation = location.results.find(
+				(_l) =>
+					_l.address_components.find((ac) =>
+						ac.types?.some(
+							(type) => type === 'administrative_area_level_1'
+						)
+					)?.short_name === 'ON'
+			);
 
-		const { created_at }: { created_at: string } = data.find((tweet) =>
-			tweet.text.toLowerCase().includes(location.address)
-		);
+			const { created_at }: { created_at: string } = data.find((tweet) =>
+				tweet.text.toLowerCase().includes(location.address)
+			);
 
-		return {
-			id: l.place_id,
-			original_address: location.address,
-			formatted_address: l.formatted_address,
-			lat: l.geometry.location.lat.toString(),
-			lng: l.geometry.location.lng.toString(),
-			created_at,
-		};
-	});
+			if (ontarioLocation) {
+				return {
+					id: ontarioLocation.place_id,
+					original_address: location.address,
+					formatted_address: ontarioLocation.formatted_address,
+					lat: ontarioLocation.geometry.location.lat.toString(),
+					lng: ontarioLocation.geometry.location.lng.toString(),
+					created_at,
+				};
+			}
+
+			return;
+		})
+		.filter((location) => location);
 }
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
