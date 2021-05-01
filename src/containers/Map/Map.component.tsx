@@ -44,7 +44,6 @@ const Map = () => {
 	}
 
 	function handleChildClick(key, marker) {
-		console.log(marker);
 		const tweets = timeline.defaultData.filter((tweet) =>
 			tweet.text
 				.replace('\n', ' ')
@@ -92,7 +91,8 @@ const Map = () => {
 			defaultZoom={DEFAULT_OPTIONS.zoom}
 			yesIWantToUseGoogleMapApiInternals
 			onGoogleApiLoaded={({ map: _map, maps }) =>
-				handleApiLoaded(_map, maps)}
+				handleApiLoaded(_map, maps)
+			}
 			onChildClick={handleChildClick}
 		>
 			{map.locations.map(
