@@ -91,8 +91,7 @@ const Map = () => {
 			defaultZoom={DEFAULT_OPTIONS.zoom}
 			yesIWantToUseGoogleMapApiInternals
 			onGoogleApiLoaded={({ map: _map, maps }) =>
-				handleApiLoaded(_map, maps)
-			}
+				handleApiLoaded(_map, maps)}
 			onChildClick={handleChildClick}
 		>
 			{map.locations.map(
