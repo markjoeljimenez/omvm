@@ -45,7 +45,9 @@ async function getLocations(data): Promise<any> {
 			.map((tweet) =>
 				tweet.text
 					.toLowerCase()
-					.match(/\d+\s[a-z]+\s(st|blvd|road|dr|drive|ave|7)+/g)
+					.match(
+						/\d+\s[a-z\s]+\s(st|street|blvd|boulevard|road|dr|drive|ave|avenue|centre|7)+/g
+					)
 			)
 			.filter((tweet) => tweet)
 			.flat()
