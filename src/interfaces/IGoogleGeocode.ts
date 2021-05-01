@@ -2,8 +2,8 @@ export interface IGoogleGeocodeResult {
 	formatted_address: string;
 	geometry: {
 		location: {
-			lat: number;
-			lng: number;
+			lat: string;
+			lng: string;
 		};
 	};
 	place_id: string;
