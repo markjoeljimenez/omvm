@@ -1,13 +1,24 @@
-import { SET_ACTIVE_FEATURES } from './Map.actions';
+import { HYDRATE } from 'next-redux-wrapper';
+import { AnyAction } from 'redux';
 
-const DEFAULT_STATE = {};
+import { SET_LOCATIONS } from './Map.actions';
 
-const MapReducer = (state = DEFAULT_STATE, { type, features }) => {
+const DEFAULT_STATE = { locations: [] };
+
+const MapReducer = (
+	state = DEFAULT_STATE,
+	{ type, locations, payload }: AnyAction
+) => {
 	switch (type) {
-		case SET_ACTIVE_FEATURES:
+		case HYDRATE:
+			return {
+				locations: payload.map.locations,
+			};
+
+		case SET_LOCATIONS:
 			return {
 				...state,
-				features,
+				locations,
 			};
 
 		default:

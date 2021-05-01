@@ -20,3 +20,12 @@ model Author {
     username          String
     profile_image_url String
 }
+
+model GeoLocation {
+    id                String   @id
+    original_address  String
+    formatted_address String
+    lat               String
+    lng               String
+    created_at        DateTime
+}

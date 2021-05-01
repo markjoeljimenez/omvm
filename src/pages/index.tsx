@@ -4,6 +4,8 @@ import { wrapper } from '../store';
 import { useAppDispatch, useAppSelector } from '../hooks';
 
 import Map from '../containers/Map/Map.component';
+import { setLocations } from '../containers/Map/Map.actions';
+
 import Timeline from '../containers/Timeline/Timeline.component';
 import {
 	setActiveTweets,
@@ -60,6 +62,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 			],
 		});
 		const users = await prisma.author.findMany();
+		const locations = await prisma.geoLocation.findMany();
 
 		const { dispatch, getState } = store;
 
@@ -71,6 +74,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
 				},
 			})
 		);
+
+		// await fetch(`${process.env.HOST}/api/request`);
+
+		dispatch(setLocations(JSON.parse(JSON.stringify(locations))));
 
 		prisma.$disconnect();
 
